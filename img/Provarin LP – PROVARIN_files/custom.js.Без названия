@@ -1,0 +1,113 @@
+/*-----------------------------------------------------------------------------/
+/ Custom Theme JS
+/-----------------------------------------------------------------------------*/
+
+// Insert any custom theme js here...
+
+
+
+
+// cart count update
+$(document).on("change", ".cart-item__qty-input" , function() {    
+  setTimeout(function() {
+    jQuery.getJSON('/cart.js', function(cart) {
+      //alert('There are now ' + cart.item_count + ' items in the cart.');
+      $("#cartCount").text(cart.item_count);
+    } );
+  }, 1000);  
+});
+
+
+$(document).on("click", ".cart-item__remove" , function() {
+    
+  setTimeout(function() {
+    jQuery.getJSON('/cart.js', function(cart) {
+      //alert('There are now ' + cart.item_count + ' items in the cart.');
+      $("#cartCount").text(cart.item_count);
+    } );
+
+
+  }, 1000);  
+});
+
+
+
+
+
+
+
+// on variant change js
+jQuery('.single-option-selector').change(function(){
+  var original = $(".product__vendor").html();
+
+  
+  if($(this).val() == '30-Day Package'){ 
+    //$('.product__vendor').hide();
+    	$(".product__vendor").text("30-Day Pack");
+    	$('.card__badge').hide();
+  	} else {
+    	$(".product__vendor").text("Buy 60-Day Box Set, Get 30-Days Free. (Save $120)");
+      	$('.card__badge').show();
+  }
+});
+
+
+
+
+
+$(document).ready(function(){
+  // Add smooth scrolling to all links
+  $("a").on('click', function(event) {
+
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function(){
+   
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+  
+  
+  
+});
+    
+
+
+
+// panel for faq's on product page
+$("#click_handle_2").click(function(){
+  //$(".special_panel").addClass("intro");
+  $(".special_e").toggleClass("activated");
+});
+
+
+$("#click_handle").click(function(){
+  //$(".special_panel").addClass("intro");
+  $(".special_panel").toggleClass("activated");
+});
+
+/*
+$(document).ready(function() {
+  $('body').on('click', '[name="checkout"], [name="goto_pp"], [name="goto_gc"]', function() {
+    if ($('#agree').is(':checked')) {
+      $(this).submit();
+    }
+    else {
+      alert("You must agree with the terms and conditions of sales to check out.");
+      return false;
+    }
+  });
+});
+*/
